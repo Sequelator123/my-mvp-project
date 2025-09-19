@@ -1,3 +1,446 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Material Design System */
+:root {
+  /* Material Design 3 Color Tokens */
+  --md-primary: #6750a4;
+  --md-primary-container: #eaddff;
+  --md-on-primary: #ffffff;
+  --md-on-primary-container: #21005d;
+
+  --md-secondary: #625b71;
+  --md-secondary-container: #e8def8;
+  --md-on-secondary: #ffffff;
+  --md-on-secondary-container: #1d192b;
+
+  --md-surface: #fffbfe;
+  --md-surface-variant: #f4eff4;
+  --md-surface-container: #f3edf7;
+  --md-surface-container-high: #ede7f0;
+  --md-surface-container-highest: #e7e0ec;
+
+  --md-on-surface: #1c1b1f;
+  --md-on-surface-variant: #49454f;
+  --md-outline: #79747e;
+  --md-outline-variant: #cac4d0;
+
+  --md-error: #ba1a1a;
+  --md-error-container: #ffdad6;
+  --md-on-error: #ffffff;
+  --md-on-error-container: #410002;
+
+  /* Material Design Elevation Shadows */
+  --md-elevation-1: 0px 1px 2px 0px rgba(0, 0, 0, 0.3), 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+  --md-elevation-2: 0px 1px 2px 0px rgba(0, 0, 0, 0.3), 0px 2px 6px 2px rgba(0, 0, 0, 0.15);
+  --md-elevation-3: 0px 1px 3px 0px rgba(0, 0, 0, 0.3), 0px 4px 8px 3px rgba(0, 0, 0, 0.15);
+  --md-elevation-4: 0px 2px 3px 0px rgba(0, 0, 0, 0.3), 0px 6px 10px 4px rgba(0, 0, 0, 0.15);
+  --md-elevation-5: 0px 4px 4px 0px rgba(0, 0, 0, 0.3), 0px 8px 12px 6px rgba(0, 0, 0, 0.15);
+
+  /* Material Design Typography Scale */
+  --md-typescale-display-large: 57px;
+  --md-typescale-display-medium: 45px;
+  --md-typescale-display-small: 36px;
+  --md-typescale-headline-large: 32px;
+  --md-typescale-headline-medium: 28px;
+  --md-typescale-headline-small: 24px;
+  --md-typescale-title-large: 22px;
+  --md-typescale-title-medium: 16px;
+  --md-typescale-title-small: 14px;
+  --md-typescale-label-large: 14px;
+  --md-typescale-label-medium: 12px;
+  --md-typescale-label-small: 11px;
+  --md-typescale-body-large: 16px;
+  --md-typescale-body-medium: 14px;
+  --md-typescale-body-small: 12px;
+}
+
+/* Material Design Components */
+.md-card {
+  background-color: var(--md-surface-container);
+  border-radius: 12px;
+  box-shadow: var(--md-elevation-1);
+  color: var(--md-on-surface);
+}
+
+.md-card-elevated {
+  background-color: var(--md-surface-container-high);
+  box-shadow: var(--md-elevation-3);
+}
+
+.md-button-filled {
+  background-color: var(--md-primary);
+  color: var(--md-on-primary);
+  border: none;
+  border-radius: 20px;
+  padding: 10px 24px;
+  font-size: var(--md-typescale-label-large);
+  font-weight: 500;
+  letter-spacing: 0.1px;
+  text-transform: none;
+  min-height: 40px;
+  box-shadow: var(--md-elevation-1);
+  transition: all 0.2s cubic-bezier(0.2, 0.0, 0.0, 1.0);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.md-button-filled:hover:not(:disabled) {
+  box-shadow: var(--md-elevation-2);
+  background-color: color-mix(in srgb, var(--md-primary) 92%, white);
+}
+
+.md-button-filled:focus {
+  outline: 2px solid var(--md-primary);
+  outline-offset: 2px;
+}
+
+.md-button-filled:disabled {
+  background-color: rgba(28, 27, 31, 0.12);
+  color: rgba(28, 27, 31, 0.38);
+  box-shadow: none;
+  cursor: default;
+}
+
+.md-button-outlined {
+  background-color: transparent;
+  color: var(--md-primary);
+  border: 1px solid var(--md-outline);
+  border-radius: 20px;
+  padding: 10px 24px;
+  font-size: var(--md-typescale-label-large);
+  font-weight: 500;
+  letter-spacing: 0.1px;
+  text-transform: none;
+  min-height: 40px;
+  transition: all 0.2s cubic-bezier(0.2, 0.0, 0.0, 1.0);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.md-button-outlined:hover:not(:disabled) {
+  background-color: rgba(103, 80, 164, 0.08);
+  border-color: var(--md-primary);
+}
+
+.md-button-outlined:focus {
+  outline: 2px solid var(--md-primary);
+  outline-offset: 2px;
+}
+
+.md-button-text {
+  background-color: transparent;
+  color: var(--md-primary);
+  border: none;
+  border-radius: 20px;
+  padding: 10px 12px;
+  font-size: var(--md-typescale-label-large);
+  font-weight: 500;
+  letter-spacing: 0.1px;
+  text-transform: none;
+  min-height: 40px;
+  transition: all 0.2s cubic-bezier(0.2, 0.0, 0.0, 1.0);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.md-button-text:hover:not(:disabled) {
+  background-color: rgba(103, 80, 164, 0.08);
+}
+
+.md-text-field {
+  position: relative;
+  background-color: var(--md-surface-container-highest);
+  border-radius: 4px 4px 0px 0px;
+  border-bottom: 1px solid var(--md-outline);
+  transition: all 0.2s cubic-bezier(0.2, 0.0, 0.0, 1.0);
+}
+
+.md-text-field:hover {
+  background-color: var(--md-surface-container-high);
+}
+
+.md-text-field:focus-within {
+  border-bottom: 2px solid var(--md-primary);
+}
+
+.md-text-field input,
+.md-text-field textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 16px 16px 8px 16px;
+  font-size: var(--md-typescale-body-large);
+  color: var(--md-on-surface);
+  resize: none;
+}
+
+.md-text-field label {
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  color: var(--md-on-surface-variant);
+  font-size: var(--md-typescale-body-large);
+  pointer-events: none;
+  transition: all 0.2s cubic-bezier(0.2, 0.0, 0.0, 1.0);
+}
+
+.md-text-field input:focus + label,
+.md-text-field textarea:focus + label,
+.md-text-field input:not(:placeholder-shown) + label,
+.md-text-field textarea:not(:placeholder-shown) + label,
+.md-text-field.has-value label {
+  top: 8px;
+  font-size: var(--md-typescale-body-small);
+  color: var(--md-primary);
+}
+
+.md-text-field input::placeholder,
+.md-text-field textarea::placeholder {
+  color: transparent;
+}
+
+.md-data-table {
+  background-color: var(--md-surface);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--md-elevation-1);
+}
+
+.md-data-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.md-data-table th {
+  background-color: var(--md-surface-container);
+  color: var(--md-on-surface-variant);
+  font-size: var(--md-typescale-title-medium);
+  font-weight: 500;
+  text-align: left;
+  padding: 16px;
+  border-bottom: 1px solid var(--md-outline-variant);
+}
+
+.md-data-table td {
+  padding: 16px;
+  border-bottom: 1px solid var(--md-outline-variant);
+  color: var(--md-on-surface);
+  font-size: var(--md-typescale-body-medium);
+}
+
+.md-data-table tr:last-child td {
+  border-bottom: none;
+}
+
+.md-data-table tr:hover {
+  background-color: rgba(103, 80, 164, 0.04);
+}
+
+.md-chip {
+  display: inline-flex;
+  align-items: center;
+  height: 32px;
+  padding: 0 16px;
+  border-radius: 16px;
+  font-size: var(--md-typescale-label-medium);
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  background-color: var(--md-surface-variant);
+  color: var(--md-on-surface-variant);
+  gap: 8px;
+}
+
+.md-chip-primary {
+  background-color: var(--md-primary-container);
+  color: var(--md-on-primary-container);
+}
+
+.md-chip-secondary {
+  background-color: var(--md-secondary-container);
+  color: var(--md-on-secondary-container);
+}
+
+.md-chip-error {
+  background-color: var(--md-error-container);
+  color: var(--md-on-error-container);
+}
+
+.md-navigation-tabs {
+  background-color: var(--md-surface-container);
+  border-radius: 12px;
+  padding: 4px;
+  display: flex;
+  gap: 4px;
+  box-shadow: var(--md-elevation-1);
+}
+
+.md-navigation-tab {
+  flex: 1;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: var(--md-typescale-title-small);
+  font-weight: 500;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.2, 0.0, 0.0, 1.0);
+  color: var(--md-on-surface-variant);
+  background: transparent;
+  border: none;
+}
+
+.md-navigation-tab:hover {
+  background-color: rgba(103, 80, 164, 0.08);
+}
+
+.md-navigation-tab.active {
+  background-color: var(--md-secondary-container);
+  color: var(--md-on-secondary-container);
+  box-shadow: var(--md-elevation-1);
+}
+
+.md-snackbar {
+  position: fixed;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--md-surface-container-high);
+  color: var(--md-on-surface);
+  padding: 14px 16px;
+  border-radius: 4px;
+  box-shadow: var(--md-elevation-3);
+  font-size: var(--md-typescale-body-medium);
+  z-index: 1000;
+}
+
+.md-snackbar.error {
+  background-color: var(--md-error-container);
+  color: var(--md-on-error-container);
+}
+
+.md-typography-display-large {
+  font-size: var(--md-typescale-display-large);
+  line-height: 64px;
+  font-weight: 400;
+  letter-spacing: -0.25px;
+}
+
+.md-typography-display-medium {
+  font-size: var(--md-typescale-display-medium);
+  line-height: 52px;
+  font-weight: 400;
+}
+
+.md-typography-display-small {
+  font-size: var(--md-typescale-display-small);
+  line-height: 44px;
+  font-weight: 400;
+}
+
+.md-typography-headline-large {
+  font-size: var(--md-typescale-headline-large);
+  line-height: 40px;
+  font-weight: 400;
+}
+
+.md-typography-headline-medium {
+  font-size: var(--md-typescale-headline-medium);
+  line-height: 36px;
+  font-weight: 400;
+}
+
+.md-typography-headline-small {
+  font-size: var(--md-typescale-headline-small);
+  line-height: 32px;
+  font-weight: 400;
+}
+
+.md-typography-title-large {
+  font-size: var(--md-typescale-title-large);
+  line-height: 28px;
+  font-weight: 400;
+}
+
+.md-typography-title-medium {
+  font-size: var(--md-typescale-title-medium);
+  line-height: 24px;
+  font-weight: 500;
+  letter-spacing: 0.15px;
+}
+
+.md-typography-title-small {
+  font-size: var(--md-typescale-title-small);
+  line-height: 20px;
+  font-weight: 500;
+  letter-spacing: 0.1px;
+}
+
+.md-typography-body-large {
+  font-size: var(--md-typescale-body-large);
+  line-height: 24px;
+  font-weight: 400;
+  letter-spacing: 0.15px;
+}
+
+.md-typography-body-medium {
+  font-size: var(--md-typescale-body-medium);
+  line-height: 20px;
+  font-weight: 400;
+  letter-spacing: 0.25px;
+}
+
+.md-typography-body-small {
+  font-size: var(--md-typescale-body-small);
+  line-height: 16px;
+  font-weight: 400;
+  letter-spacing: 0.4px;
+}
+
+.md-typography-label-large {
+  font-size: var(--md-typescale-label-large);
+  line-height: 20px;
+  font-weight: 500;
+  letter-spacing: 0.1px;
+}
+
+.md-typography-label-medium {
+  font-size: var(--md-typescale-label-medium);
+  line-height: 16px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.md-typography-label-small {
+  font-size: var(--md-typescale-label-small);
+  line-height: 16px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+/* Material Design Motion */
+.md-motion-emphasized-decelerate {
+  transition-timing-function: cubic-bezier(0.05, 0.7, 0.1, 1.0);
+}
+
+.md-motion-emphasized-accelerate {
+  transition-timing-function: cubic-bezier(0.3, 0.0, 0.8, 0.15);
+}
+
+.md-motion-emphasized {
+  transition-timing-function: cubic-bezier(0.2, 0.0, 0.0, 1.0);
+}
+
+.md-motion-standard {
+  transition-timing-function: cubic-bezier(0.2, 0.0, 0.0, 1.0);
+}

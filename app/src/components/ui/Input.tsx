@@ -23,21 +23,24 @@ export const Input: React.FC<InputProps> = ({
   label,
   className = ''
 }) => {
+  const hasValue = value && value.length > 0
+
   return (
     <div className={className}>
-      <label htmlFor={id} className="block text-sm font-medium text-gray-700 mb-2">
-        {label} {required && '*'}
-      </label>
-      <input
-        type={type}
-        id={id}
-        name={name}
-        value={value}
-        onChange={onChange}
-        placeholder={placeholder}
-        required={required}
-        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
+      <div className={`md-text-field ${hasValue ? 'has-value' : ''}`}>
+        <input
+          type={type}
+          id={id}
+          name={name}
+          value={value}
+          onChange={onChange}
+          placeholder={placeholder || label}
+          required={required}
+        />
+        <label htmlFor={id}>
+          {label} {required && '*'}
+        </label>
+      </div>
     </div>
   )
 }

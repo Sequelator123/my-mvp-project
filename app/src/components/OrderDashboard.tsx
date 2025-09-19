@@ -14,77 +14,147 @@ export const OrderDashboard: React.FC<OrderDashboardProps> = ({ pb, setViewMode 
   const { orders, isLoading, error, lastRefresh, fetchOrders } = useOrders(pb, true)
 
   return (
-    <div className="bg-white rounded-lg shadow-lg p-8">
-      <div className="flex justify-between items-center mb-6">
-        <div>
-          <h1 className="text-3xl font-bold text-gray-800">
-            📊 Order Dashboard
-          </h1>
-          <p className="text-gray-600">
-            Real-time view of all submitted lunch orders
-          </p>
+    <div className="space-y-6">
+      <div className="md-card-elevated p-8">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-8">
+          <div className="mb-6 sm:mb-0">
+            <div className="flex items-center mb-4">
+              <div
+                className="w-12 h-12 mr-4 rounded-full flex items-center justify-center"
+                style={{
+                  backgroundColor: 'var(--md-primary-container)',
+                  fontSize: '24px'
+                }}
+              >
+                📊
+              </div>
+              <div>
+                <h1 className="md-typography-headline-medium mb-1" style={{ color: 'var(--md-on-surface)' }}>
+                  Order Dashboard
+                </h1>
+                <p className="md-typography-body-large" style={{ color: 'var(--md-on-surface-variant)' }}>
+                  Real-time view of all submitted lunch orders
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-col items-end gap-3">
+            <Button
+              variant="outlined"
+              onClick={fetchOrders}
+              disabled={isLoading}
+            >
+              {isLoading ? (
+                <div className="flex items-center gap-2">
+                  <div
+                    className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin"
+                  ></div>
+                  <span>Refreshing...</span>
+                </div>
+              ) : (
+                <div className="flex items-center gap-2">
+                  <span style={{ fontSize: '16px' }}>🔄</span>
+                  <span>Refresh</span>
+                </div>
+              )}
+            </Button>
+            {lastRefresh && (
+              <div className="flex items-center gap-2">
+                <div
+                  className="w-3 h-3 rounded-full"
+                  style={{ backgroundColor: 'var(--md-primary)' }}
+                ></div>
+                <span className="md-typography-body-small" style={{ color: 'var(--md-on-surface-variant)' }}>
+                  Last updated: {lastRefresh.toLocaleTimeString()}
+                </span>
+              </div>
+            )}
+          </div>
         </div>
-        <div className="text-right">
-          <Button
-            variant="secondary"
-            onClick={fetchOrders}
-            disabled={isLoading}
-            className="mb-2"
-          >
-            {isLoading ? 'Refreshing...' : 'Refresh'}
-          </Button>
-          {lastRefresh && (
-            <p className="text-xs text-gray-500">
-              Last updated: {lastRefresh.toLocaleTimeString()}
-            </p>
-          )}
-        </div>
-      </div>
 
-      {error && (
-        <div className="mb-6 p-4 bg-red-50 text-red-800 border border-red-200 rounded-md">
-          {error}
-        </div>
-      )}
+        {error && (
+          <div className="mb-6 md-snackbar error">
+            <div className="flex items-center gap-2">
+              <span style={{ fontSize: '16px' }}>⚠️</span>
+              <span className="md-typography-body-medium">{error}</span>
+            </div>
+          </div>
+        )}
 
-      <div className="mb-4 flex justify-between items-center">
-        <p className="text-sm text-gray-600">
-          Total orders: <span className="font-semibold">{orders.length}</span>
-        </p>
-        <div className="flex gap-4 text-xs">
-          <span className="flex items-center gap-1">
-            <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
-            Pending
-          </span>
-          <span className="flex items-center gap-1">
-            <div className="w-3 h-3 bg-green-400 rounded-full"></div>
-            Confirmed
-          </span>
-          <span className="flex items-center gap-1">
-            <div className="w-3 h-3 bg-red-400 rounded-full"></div>
-            Cancelled
-          </span>
+        <div className="md-card p-6 mb-6">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center">
+            <div className="mb-4 sm:mb-0">
+              <h2 className="md-typography-title-large mb-1">
+                Total orders: <span style={{ color: 'var(--md-primary)' }}>{orders.length}</span>
+              </h2>
+              <p className="md-typography-body-medium" style={{ color: 'var(--md-on-surface-variant)' }}>
+                Live dashboard updates every 10 seconds
+              </p>
+            </div>
+            <div className="flex gap-6">
+              <div className="flex items-center gap-2">
+                <div
+                  className="w-3 h-3 rounded-full"
+                  style={{ backgroundColor: 'var(--md-secondary)' }}
+                ></div>
+                <span className="md-typography-body-small" style={{ color: 'var(--md-on-surface-variant)' }}>
+                  Pending
+                </span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div
+                  className="w-3 h-3 rounded-full"
+                  style={{ backgroundColor: 'var(--md-primary)' }}
+                ></div>
+                <span className="md-typography-body-small" style={{ color: 'var(--md-on-surface-variant)' }}>
+                  Confirmed
+                </span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div
+                  className="w-3 h-3 rounded-full"
+                  style={{ backgroundColor: 'var(--md-error)' }}
+                ></div>
+                <span className="md-typography-body-small" style={{ color: 'var(--md-on-surface-variant)' }}>
+                  Cancelled
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
       {orders.length === 0 && !isLoading ? (
-        <div className="text-center py-8">
-          <p className="text-gray-600">No orders submitted yet.</p>
-          <button
+        <div className="md-card p-8 text-center">
+          <div className="mb-4" style={{ fontSize: '64px' }}>📋</div>
+          <h3 className="md-typography-headline-small mb-2">No orders submitted yet</h3>
+          <p className="md-typography-body-large mb-6" style={{ color: 'var(--md-on-surface-variant)' }}>
+            Get started by submitting the first lunch order
+          </p>
+          <Button
+            variant="filled"
             onClick={() => setViewMode('form')}
-            className="mt-2 text-blue-600 hover:text-blue-700"
           >
-            Submit the first order →
-          </button>
+            <span style={{ fontSize: '16px', marginRight: '8px' }}>➕</span>
+            Submit First Order
+          </Button>
         </div>
       ) : (
         <Table orders={orders} isLoading={isLoading} />
       )}
 
-      <div className="mt-6 pt-6 border-t border-gray-200">
-        <p className="text-sm text-gray-600 text-center">
-          Orders refresh automatically every 10 seconds. Volunteers can export this data from PocketBase admin.
-        </p>
+      <div className="md-card p-4">
+        <div className="text-center">
+          <div className="inline-flex items-center gap-2">
+            <div
+              className="w-4 h-4 rounded-full"
+              style={{ backgroundColor: 'var(--md-primary)' }}
+            ></div>
+            <span className="md-typography-body-small" style={{ color: 'var(--md-on-surface-variant)' }}>
+              Data refreshes automatically. Volunteers can export order details from PocketBase admin panel.
+            </span>
+          </div>
+        </div>
       </div>
     </div>
   )

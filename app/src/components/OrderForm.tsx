@@ -20,13 +20,24 @@ export const OrderForm: React.FC<OrderFormProps> = ({ pb }) => {
 
   return (
     <div className="max-w-2xl mx-auto">
-      <div className="bg-white rounded-lg shadow-lg p-8">
-        <h1 className="text-3xl font-bold text-gray-800 mb-2 text-center">
-          🍽️ Lunch Order Form
-        </h1>
-        <p className="text-gray-600 text-center mb-8">
-          Submit your lunch order for today
-        </p>
+      <div className="md-card-elevated p-8">
+        <div className="text-center mb-8">
+          <div
+            className="inline-flex items-center justify-center w-16 h-16 mb-4 rounded-full"
+            style={{
+              backgroundColor: 'var(--md-primary-container)',
+              fontSize: '32px'
+            }}
+          >
+            🍽️
+          </div>
+          <h1 className="md-typography-headline-medium mb-2" style={{ color: 'var(--md-on-surface)' }}>
+            Lunch Order Form
+          </h1>
+          <p className="md-typography-body-large" style={{ color: 'var(--md-on-surface-variant)' }}>
+            Submit your lunch order for coordinated delivery
+          </p>
+        </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <Input
@@ -71,28 +82,54 @@ export const OrderForm: React.FC<OrderFormProps> = ({ pb }) => {
           />
 
           {message && (
-            <div className={`p-4 rounded-md ${
-              message.type === 'success'
-                ? 'bg-green-50 text-green-800 border border-green-200'
-                : 'bg-red-50 text-red-800 border border-red-200'
-            }`}>
-              {message.text}
+            <div className={message.type === 'success' ? 'md-snackbar' : 'md-snackbar error'}>
+              <div className="flex items-center gap-2">
+                <div
+                  className="w-4 h-4 rounded-full"
+                  style={{
+                    backgroundColor: message.type === 'success'
+                      ? 'var(--md-primary)'
+                      : 'var(--md-error)'
+                  }}
+                ></div>
+                <span className="md-typography-body-medium">{message.text}</span>
+              </div>
             </div>
           )}
 
-          <Button
-            type="submit"
-            disabled={isSubmitting}
-            className="w-full"
-          >
-            {isSubmitting ? 'Submitting...' : 'Submit Order'}
-          </Button>
+          <div className="pt-4">
+            <Button
+              type="submit"
+              variant="filled"
+              disabled={isSubmitting}
+              className="w-full"
+            >
+              {isSubmitting ? (
+                <div className="flex items-center gap-2">
+                  <div
+                    className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin"
+                  ></div>
+                  <span>Submitting Order...</span>
+                </div>
+              ) : (
+                'Submit Order'
+              )}
+            </Button>
+          </div>
         </form>
 
-        <div className="mt-8 pt-6 border-t border-gray-200">
-          <p className="text-sm text-gray-600 text-center">
-            Your order will be collected and volunteers will handle restaurant coordination.
-          </p>
+        <div className="mt-8 pt-6" style={{ borderTop: '1px solid var(--md-outline-variant)' }}>
+          <div className="text-center">
+            <div className="inline-flex items-center gap-2 text-center">
+              <div
+                className="w-4 h-4 rounded-full"
+                style={{ backgroundColor: 'var(--md-primary)' }}
+              ></div>
+              <p className="md-typography-body-small" style={{ color: 'var(--md-on-surface-variant)' }}>
+                Orders are collected daily and volunteers coordinate restaurant delivery
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -10,20 +10,22 @@ interface NavigationProps {
 export const Navigation: React.FC<NavigationProps> = ({ viewMode, setViewMode }) => {
   return (
     <div className="mb-8 flex justify-center">
-      <div className="bg-white rounded-lg shadow-sm p-1 flex">
+      <div className="md-navigation-tabs max-w-md w-full">
         <Button
           variant="tab"
           isActive={viewMode === 'form'}
           onClick={() => setViewMode('form')}
         >
-          📝 Submit Order
+          <span style={{ fontSize: '18px', marginRight: '8px' }}>📝</span>
+          <span className="md-typography-title-small">Submit Order</span>
         </Button>
         <Button
           variant="tab"
           isActive={viewMode === 'dashboard'}
           onClick={() => setViewMode('dashboard')}
         >
-          📊 View Dashboard
+          <span style={{ fontSize: '18px', marginRight: '8px' }}>📊</span>
+          <span className="md-typography-title-small">View Dashboard</span>
         </Button>
       </div>
     </div>

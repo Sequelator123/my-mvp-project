@@ -9,74 +9,99 @@ interface TableProps {
 export const Table: React.FC<TableProps> = ({ orders, isLoading = false }) => {
   if (isLoading) {
     return (
-      <div className="text-center py-8">
-        <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
-        <p className="mt-2 text-gray-600">Loading orders...</p>
+      <div className="md-card p-8 text-center">
+        <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2" style={{ borderColor: 'var(--md-primary)' }}></div>
+        <p className="mt-4 md-typography-body-medium" style={{ color: 'var(--md-on-surface-variant)' }}>Loading orders...</p>
       </div>
     )
   }
 
   if (orders.length === 0) {
     return (
-      <div className="text-center py-8">
-        <p className="text-gray-600">No orders submitted yet.</p>
+      <div className="md-card p-8 text-center">
+        <div className="mb-4" style={{ fontSize: '48px' }}>📋</div>
+        <h3 className="md-typography-headline-small mb-2">No orders submitted yet</h3>
+        <p className="md-typography-body-medium" style={{ color: 'var(--md-on-surface-variant)' }}>
+          Orders will appear here once employees start submitting their lunch requests.
+        </p>
       </div>
     )
   }
 
+  const getStatusChip = (status: string) => {
+    const baseClasses = "md-chip"
+    switch (status) {
+      case 'confirmed':
+        return `${baseClasses} md-chip-primary`
+      case 'pending':
+        return `${baseClasses} md-chip-secondary`
+      case 'cancelled':
+        return `${baseClasses} md-chip-error`
+      default:
+        return baseClasses
+    }
+  }
+
   return (
-    <div className="overflow-x-auto">
-      <table className="w-full border-collapse border border-gray-300">
+    <div className="md-data-table">
+      <table>
         <thead>
-          <tr className="bg-gray-50">
-            <th className="border border-gray-300 px-4 py-2 text-left">Employee</th>
-            <th className="border border-gray-300 px-4 py-2 text-left">Order</th>
-            <th className="border border-gray-300 px-4 py-2 text-left">Dietary Notes</th>
-            <th className="border border-gray-300 px-4 py-2 text-left">Date</th>
-            <th className="border border-gray-300 px-4 py-2 text-left">Status</th>
-            <th className="border border-gray-300 px-4 py-2 text-left">Submitted</th>
+          <tr>
+            <th>Employee</th>
+            <th>Order</th>
+            <th>Dietary Notes</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Submitted</th>
           </tr>
         </thead>
         <tbody>
           {orders.map((order) => (
-            <tr key={order.id} className="hover:bg-gray-50">
-              <td className="border border-gray-300 px-4 py-2 font-medium">
-                {order.employee_name}
-              </td>
-              <td className="border border-gray-300 px-4 py-2">
-                <div className="max-w-xs">
-                  {order.order_item.length > 50
-                    ? `${order.order_item.substring(0, 50)}...`
-                    : order.order_item
-                  }
-                </div>
-              </td>
-              <td className="border border-gray-300 px-4 py-2 text-sm text-gray-600">
-                {order.dietary_notes || '-'}
-              </td>
-              <td className="border border-gray-300 px-4 py-2">
-                {new Date(order.order_date).toLocaleDateString()}
-              </td>
-              <td className="border border-gray-300 px-4 py-2">
-                <span className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium ${
-                  order.status === 'pending'
-                    ? 'bg-yellow-100 text-yellow-800'
-                    : order.status === 'confirmed'
-                    ? 'bg-green-100 text-green-800'
-                    : 'bg-red-100 text-red-800'
-                }`}>
-                  <div className={`w-2 h-2 rounded-full ${
-                    order.status === 'pending'
-                      ? 'bg-yellow-400'
-                      : order.status === 'confirmed'
-                      ? 'bg-green-400'
-                      : 'bg-red-400'
-                  }`}></div>
-                  {order.status}
+            <tr key={order.id}>
+              <td>
+                <span className="md-typography-body-medium font-medium">
+                  {order.employee_name}
                 </span>
               </td>
-              <td className="border border-gray-300 px-4 py-2 text-sm text-gray-600">
-                {new Date(order.created).toLocaleString()}
+              <td>
+                <div style={{ maxWidth: '300px' }}>
+                  <span className="md-typography-body-medium">
+                    {order.order_item.length > 60
+                      ? `${order.order_item.substring(0, 60)}...`
+                      : order.order_item
+                    }
+                  </span>
+                </div>
+              </td>
+              <td>
+                <span className="md-typography-body-small" style={{ color: 'var(--md-on-surface-variant)' }}>
+                  {order.dietary_notes || '—'}
+                </span>
+              </td>
+              <td>
+                <span className="md-typography-body-medium">
+                  {new Date(order.order_date).toLocaleDateString()}
+                </span>
+              </td>
+              <td>
+                <span className={getStatusChip(order.status)}>
+                  <div
+                    className="w-2 h-2 rounded-full"
+                    style={{
+                      backgroundColor: order.status === 'pending'
+                        ? 'var(--md-secondary)'
+                        : order.status === 'confirmed'
+                        ? 'var(--md-primary)'
+                        : 'var(--md-error)'
+                    }}
+                  ></div>
+                  {order.status.charAt(0).toUpperCase() + order.status.slice(1)}
+                </span>
+              </td>
+              <td>
+                <span className="md-typography-body-small" style={{ color: 'var(--md-on-surface-variant)' }}>
+                  {new Date(order.created).toLocaleDateString()} {new Date(order.created).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                </span>
               </td>
             </tr>
           ))}
