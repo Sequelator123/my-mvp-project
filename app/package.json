@@ -7,7 +7,14 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "playwright test --project=chromium",
+    "test:all": "playwright test",
+    "test:headed": "playwright test --headed --project=chromium",
+    "test:ui": "playwright test --ui",
+    "test:core": "playwright test tests/integration/core-features.spec.ts --project=chromium",
+    "test:errors": "playwright test tests/integration/error-handling.spec.ts --project=chromium",
+    "test:report": "playwright show-report"
   },
   "dependencies": {
     "pocketbase": "^0.26.2",
@@ -16,6 +23,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.35.0",
+    "@playwright/test": "^1.55.0",
     "@tailwindcss/postcss": "^4.1.13",
     "@types/react": "^19.1.13",
     "@types/react-dom": "^19.1.9",
@@ -25,6 +33,7 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
     "globals": "^16.4.0",
+    "playwright": "^1.55.0",
     "postcss": "^8.5.6",
     "tailwindcss": "^4.1.13",
     "typescript": "~5.8.3",
