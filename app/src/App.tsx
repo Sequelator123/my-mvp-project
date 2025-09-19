@@ -14,7 +14,7 @@ function App() {
       className="min-h-screen py-8"
       style={{ backgroundColor: 'var(--md-surface)' }}
     >
-      <div className="max-w-7xl mx-auto px-4">
+      <div className="max-w-[1200px] mx-auto px-8">
         {/* App Header */}
         <div className="text-center mb-12">
           <div
