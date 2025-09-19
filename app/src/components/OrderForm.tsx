@@ -97,12 +97,12 @@ export const OrderForm: React.FC<OrderFormProps> = ({ pb }) => {
             </div>
           )}
 
-          <div className="pt-4">
+          <div className="pt-8 mt-4 flex justify-center">
             <Button
               type="submit"
               variant="filled"
               disabled={isSubmitting}
-              className="w-full"
+              className="max-w-[180px] w-full my-4"
             >
               {isSubmitting ? (
                 <div className="flex items-center gap-2">

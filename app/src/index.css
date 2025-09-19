@@ -39,21 +39,21 @@
   --md-elevation-5: 0px 4px 4px 0px rgba(0, 0, 0, 0.3), 0px 8px 12px 6px rgba(0, 0, 0, 0.15);
 
   /* Material Design Typography Scale */
-  --md-typescale-display-large: 57px;
-  --md-typescale-display-medium: 45px;
-  --md-typescale-display-small: 36px;
-  --md-typescale-headline-large: 32px;
-  --md-typescale-headline-medium: 28px;
-  --md-typescale-headline-small: 24px;
-  --md-typescale-title-large: 22px;
-  --md-typescale-title-medium: 16px;
-  --md-typescale-title-small: 14px;
-  --md-typescale-label-large: 14px;
-  --md-typescale-label-medium: 12px;
-  --md-typescale-label-small: 11px;
-  --md-typescale-body-large: 16px;
-  --md-typescale-body-medium: 14px;
-  --md-typescale-body-small: 12px;
+  --md-typescale-display-large: 64px;
+  --md-typescale-display-medium: 52px;
+  --md-typescale-display-small: 42px;
+  --md-typescale-headline-large: 38px;
+  --md-typescale-headline-medium: 32px;
+  --md-typescale-headline-small: 28px;
+  --md-typescale-title-large: 26px;
+  --md-typescale-title-medium: 20px;
+  --md-typescale-title-small: 18px;
+  --md-typescale-label-large: 18px;
+  --md-typescale-label-medium: 16px;
+  --md-typescale-label-small: 14px;
+  --md-typescale-body-large: 20px;
+  --md-typescale-body-medium: 18px;
+  --md-typescale-body-small: 16px;
 }
 
 /* Material Design Components */
@@ -180,16 +180,18 @@
   background: transparent;
   border: none;
   outline: none;
-  padding: 16px 16px 8px 16px;
+  padding: 24px 16px 12px 16px;
   font-size: var(--md-typescale-body-large);
   color: var(--md-on-surface);
   resize: none;
+  min-height: 56px;
+  box-sizing: border-box;
 }
 
 .md-text-field label {
   position: absolute;
   left: 16px;
-  top: 16px;
+  top: 20px;
   color: var(--md-on-surface-variant);
   font-size: var(--md-typescale-body-large);
   pointer-events: none;
@@ -201,7 +203,7 @@
 .md-text-field input:not(:placeholder-shown) + label,
 .md-text-field textarea:not(:placeholder-shown) + label,
 .md-text-field.has-value label {
-  top: 8px;
+  top: 4px;
   font-size: var(--md-typescale-body-small);
   color: var(--md-primary);
 }
@@ -209,6 +211,22 @@
 .md-text-field input::placeholder,
 .md-text-field textarea::placeholder {
   color: transparent;
+}
+
+/* Date input specific styling */
+.md-text-field input[type="date"] {
+  padding-right: 48px;
+  box-sizing: border-box;
+}
+
+.md-text-field input[type="date"]::-webkit-calendar-picker-indicator {
+  position: absolute;
+  right: 16px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  opacity: 0.6;
+  background-size: 20px;
 }
 
 .md-data-table {
